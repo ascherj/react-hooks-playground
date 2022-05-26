@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "A playground for React Hooks.",
   "scripts": {
-    "start": "npm run serve & npm run watch",
-    "serve": "serve client/dist",
+    "start": "webpack-dev-server --mode development",
     "watch": "webpack -w",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jake Ascher",
@@ -26,10 +26,10 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "prettier": "2.6.2",
-    "serve": "^13.0.2",
     "style-loader": "^3.3.1",
     "webpack": "^5.72.1",
-    "webpack-cli": "^4.9.2"
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
   },
   "dependencies": {
     "react": "^18.1.0",
