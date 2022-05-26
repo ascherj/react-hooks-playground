@@ -1,15 +1,19 @@
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <h1> Hello, World! </h1>
-      </div>
-    );
-  }
+function App() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+  });
+
+  return (
+    <div className="App">
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me!</button>
+    </div>
+  );
 }
 
 export default App;
