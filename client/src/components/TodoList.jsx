@@ -1,15 +1,20 @@
 import React from 'react';
-import tasks from '../../../database/tasks';
+import PropTypes from 'prop-types';
 
-export default function TodoList() {
+export default function TodoList({ todos }) {
   return (
-    <>
-      <h3>Todo List</h3>
-      <ul>
-        {tasks.map((task, i) => (
-          <li key={i}>{task.description}</li>
-        ))}
-      </ul>
-    </>
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.description}</li>
+      ))}
+    </ul>
   );
 }
+
+TodoList.propTypes = {
+  todos: PropTypes.array
+};
+
+TodoList.defaultProps = {
+  todos: []
+};
