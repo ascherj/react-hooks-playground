@@ -7,11 +7,7 @@ import TodoList from './components/TodoList';
 
 export default function App() {
   const [todos, setTodos] = useState([]);
-
-  const addTodo = (todo) => {
-    const newTodo = { id: todos.length, description: todo };
-    setTodos([...todos, newTodo]);
-  };
+  const [nextTodoId, setNextTodoId] = useState(null);
 
   // cDM
   useEffect(() => {
@@ -25,16 +21,27 @@ export default function App() {
     }
   }, []);
 
-  // Update local storage whenever todos changes
+  // When todos changes...
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
+    setNextTodoId(todos.length ? todos[todos.length - 1].id + 1 : 0);
   }, [todos]);
+
+  const addTodo = (todo) => {
+    const newTodo = { id: nextTodoId, description: todo };
+    setTodos([...todos, newTodo]);
+  };
+
+  const deleteTodo = (todoId) => {
+    const newTodos = todos.filter((todo) => todo.id !== todoId);
+    setTodos(newTodos);
+  };
 
   return (
     <div className="App">
       <h3>Todo List</h3>
       <NewTodo addTodo={addTodo} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} deleteTodo={deleteTodo} />
     </div>
   );
 }
