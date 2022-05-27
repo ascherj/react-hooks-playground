@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import './App.css';
 
 import NewTodo from './components/NewTodo';
@@ -11,6 +12,23 @@ export default function App() {
     const newTodo = { id: todos.length, description: todo };
     setTodos([...todos, newTodo]);
   };
+
+  // cDM
+  useEffect(() => {
+    const localTodos = localStorage.getItem('todos');
+    const hasItemsInLocalStorage = localTodos && localTodos.length;
+
+    if (!hasItemsInLocalStorage) {
+      localStorage.setItem('todos', JSON.stringify([]));
+    } else {
+      setTodos(JSON.parse(localTodos));
+    }
+  }, []);
+
+  // Update local storage whenever todos changes
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <div className="App">
